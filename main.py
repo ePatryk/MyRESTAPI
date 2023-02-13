@@ -26,11 +26,13 @@ def hello():
     return "Hello World!"
 
 
+# GET method for all products
 @app.route("/products", methods=["GET"])
 def get_products():
     return jsonify(products)
 
 
+# GET method for specific product
 @app.route("/products/<int:product_id>", methods=["GET"])
 def get_product(product_id):
     product = next((p for p in products if p["id"] == product_id), None)
@@ -40,6 +42,20 @@ def get_product(product_id):
         return "Product not found", 404
 
 
+# POST method
+@app.route("/products", methods=["POST"])
+def add_product():
+    data = request.get_json()
+    product = {
+        "id": len(products) + 1,
+        "name": data["name"],
+        "price": data["price"]
+    }
+    products.append(product)
+    return jsonify(product), 201
+
+
+# PUT method
 @app.route("/products/<int:product_id>", methods=["PUT"])
 def update_product(product_id):
     product = next((p for p in products if p["id"] == product_id), None)

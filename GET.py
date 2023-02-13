@@ -1,6 +1,8 @@
 import requests
 
-response = requests.get("http://localhost:5000/products/1")
+#GET all products method request
+
+response = requests.get("http://localhost:5000/products")
 
 if response.status_code == 200:
     try:

@@ -1,5 +1,6 @@
 import requests
 
+#add product method by POST method
 url = "http://localhost:5000/products"
 
 headers = {
